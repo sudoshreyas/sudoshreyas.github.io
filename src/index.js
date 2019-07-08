@@ -4,11 +4,12 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import App from './App';
 import list from './list';
 import doctor from './doctor';
-
+import dashboard from './dashboard'
 import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
         <BrowserRouter>
  <Switch>
+ 		<Route path="/doctor/dashboard" component={ dashboard } />
  		<Route path="/doctor/:id" component={ doctor } />
  		<Route path="/doctor_list" component={ list } />
         <Route path="/" component={ App } />

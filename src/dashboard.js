@@ -1,7 +1,7 @@
 import React , {Component}  from 'react';
 import {CSSTransition} from 'react-transition-group';
 import './App.css';
-import Doctor from './doc';
+import Doctor from './edit';
 class App extends Component
 {
 constructor(props)
@@ -20,7 +20,7 @@ componentWillMount() {
   .then(res => res.json())
   .then((datas) => {
      datas.forEach((data)=>{//analyzing the recieced data setting up hospital lists for hospitals ,getting all the cities etc
-     	if(data.doc_id===this.props.match.params.id)
+     	if(data.doc_id===localStorage.doc_id)
      	{
         if((data.from_hospital===1))
           {
@@ -58,17 +58,25 @@ return(
 <div className="container" style={{"marginTop":"5px"}} >
 <br/>
 	{doctor!==null?
-    <CSSTransition
-    in={true}
-    appear={true}
-    timeout={500}
-    classNames="fade"
-    >
-    <Doctor
-            doctor={doctor}
-            fromList={false}
-          />
-          </CSSTransition>:null}
+    <div>
+      <h1 className="headings">My Profile</h1>
+      <CSSTransition
+      in={true}
+      appear={true}
+      timeout={500}
+      classNames="fade"
+      >
+        <Doctor
+              doctor={doctor}
+              fromList={false}
+        />
+      </CSSTransition>
+      <h1 className="headings">My Slots</h1><br/>
+      <h1 className="headings">My History</h1><br/>
+      <h1 className="headings">My Review</h1><br/>
+    </div>:
+    <h1>You Are Not Authorized To View This Page</h1>
+  }
 
 
 

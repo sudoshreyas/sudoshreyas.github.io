@@ -237,7 +237,7 @@ this.setState({
       <div className="col-sm-4" style={{"marginTop":"10px"}}>
          <p ><i className="far fa-thumbs-up"></i>{this.state.doctor.rank}</p>
          {!this.state.editFee?
-         <p onClick={()=>{this.setState({editFee:true})}} style={{"color":"green"}}><i className="fas fa-rupee-sign"></i> {this.state.doctor.doc_fee} <i style={{"opacity":"0.3","cursor":"pointer"}} class="fas fa-pencil-alt"></i> </p>
+         <p onClick={()=>{this.setState({editFee:true})}} style={{"color":"green"}}><i className="fas fa-rupee-sign"></i> {this.state.doctor.doc_fee} <i style={{"opacity":"0.3","cursor":"pointer"}} className="fas fa-pencil-alt"></i> </p>
          :
          <center className="row" style={{"margin":"0px"}}>
             <label className=" col-sm-2 col-xs-2 "><i className="fas fa-rupee-sign"></i></label><input type="number" id={"Fee"} className="col-sm-6 col-xs-6 " defaultValue={this.state.doctor.doc_fee} placeholder="Your Fee"/>
