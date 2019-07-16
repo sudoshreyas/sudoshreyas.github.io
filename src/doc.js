@@ -118,7 +118,7 @@ this.setState({
                   <p style={{"color": "gray"}}>Note : Timings may vary slightly depending upon the number of patients and availability of doctor.</p>
                 </div>
                 <br/>
-<p style={{"color":"#800080"}}>*No Booking Charges Applied*</p>
+
 </div>
 </div>
 <div style={{"overflow":"hidden","width":"100%"}}>

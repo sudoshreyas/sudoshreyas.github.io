@@ -102,15 +102,15 @@ return(
           <h4>{Appointment.pat_name}</h4>
           <p>Age : {Appointment.pat_age}<br/>
             Address : {Appointment.pat_address}<br/>
-            <span style={{"float":"left","fontWeight":"bold",fontSize:"13px"}}>Status : {Appointment.status===1?"Confirmed":"Cancelled"}</span>
+            <span style={{"float":"left","fontWeight":"bold",fontSize:"13px"}}>Status : {Appointment.status===1?<i>Confirmed</i>:<i style={{color:"red"}}>Cancelled</i>}</span>
             <span style={{"float":"right","fontWeight":"bold",fontSize:"13px"}}>Slot {Appointment.slot}</span>
           </p>
           </div>
         </div>:
         <div className="col-md-3 col-sm-6 col-xs-12" onClick={()=>{this.setState({showAppointment:true,showAppointmentIndex:index})}}  style={{cursor:"pointer","overflow":"hidden","display":"inline-block",float:"none"}}>
           <div style={{"backgroundColor":"#61d4b3","borderRadius":"5px","padding":"10px","overflow":"hidden","marginBottom":"15px"}}>
-          <p>Appointment with {Appointment.pat_name}</p>
-          <span style={{"float":"left","fontWeight":"bold",fontSize:"13px"}}>Status : {Appointment.status===1?"Confirmed":"Cancelled"}</span>
+          <p>{index+1}. Appointment with {Appointment.pat_name}</p>
+          <span style={{"float":"left","fontWeight":"bold",fontSize:"13px"}}>Status : {Appointment.status===1?<i>Confirmed</i>:<i style={{color:"red"}}>Cancelled</i>}</span>
           <span style={{"float":"right","fontWeight":"bold",fontSize:"13px"}}>Slot {Appointment.slot}</span>
           </div>
         </div>

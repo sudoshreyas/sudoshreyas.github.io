@@ -184,7 +184,7 @@ finalBook(slot)
       <div style={{"border":"solid","borderRadius":"10px","borderWidth":"1px","borderColor":"#5d00ff","padding":"3px"}}>
       {this.state.slotTimings.map((time,index)=>
         index>=this.state.min&&index<=this.state.max&&this.state.slots[index]!=='0'?(this.state.slots[index]<this.state.max_online || this.state.slots[index]==='A')?
-        <div key={index} className="col-xs-6 col-sm-4 col-md-4 btn" style={{"color":"#1DA6FD","padding":"5px"}} onClick={()=>{this.toggleInput(index)}}>{time}({this.state.slots[index]})</div>
+        <div key={index} className="col-xs-6 col-sm-4 col-md-4 btn" style={{"color":"#1DA6FD","padding":"5px"}} onClick={()=>{this.toggleInput(index)}}>{time}{isNaN(this.state.slots[index])?null:<>({this.state.slots[index]})</>}</div>
         :<div key={index} className="col-xs-6 col-sm-4 col-md-4 btn disabled" style={{"color":"grey","padding":"5px"}}>{time}(full)</div>
         :null
       )
