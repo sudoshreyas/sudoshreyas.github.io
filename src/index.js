@@ -5,11 +5,13 @@ import App from './App';
 import list from './list';
 import doctor from './doctor';
 import dashboard from './dashboard';
+import verify from './verify';
 import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
         <BrowserRouter 
 basename={process.env.PUBLIC_URL}>
  <Switch>
+ 		<Route path="/verify/:ph" component={ verify } />
  		<Route path="/doctor/dashboard" component={ dashboard } />
  		<Route path="/doctor/:id" component={ doctor } />
  		<Route path="/doctor_list" component={ list } />

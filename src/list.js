@@ -2,7 +2,8 @@ import React , {Component}  from 'react';
 import {CSSTransition} from 'react-transition-group';
 import './App.css';
 import Doctor from './doc';
-
+import $ from 'jquery';
+import Header from './header'
 class App extends Component
 {
 constructor(props)
@@ -21,19 +22,22 @@ constructor(props)
 //fetching data from api//
 
 componentWillMount() {
-  let presentCities = new Set();
-  presentCities.add("All");
-  fetch('https://www.mocky.io/v2/5d1483282f00007405c4f13d')
-  .then(res => res.json())
-  .then((datas) => {
-     datas.forEach((data)=>{//analyzing the recieced data setting up hospital lists for hospitals ,getting all the cities etc
+  this.apiCall(this.state.currentCity);
+}
+apiCall(reqcity){
+  let pointer=this;
+  $.post("https://bigobackend.herokuapp.com/doctors", {
+                  "language_id":1,
+                  "city":reqcity
+                },  
+                function(datas,status) { 
+                    console.log(datas);
+     datas.data.forEach((data)=>{//analyzing the recieced data setting up hospital lists for hospitals ,getting all the cities etc
         if((data.from_hospital===1))
           {
             data.isHospital=1;
             data.doc_List=[];
-            
-            datas.forEach((childData)=>{
-            
+            datas.data.forEach((childData)=>{
               if((childData.doc_id!==childData.hospital_id)&&(childData.hospital_id===data.hospital_id))
               {
                 data.doc_List[data.doc_List.length]=childData;
@@ -44,23 +48,17 @@ componentWillMount() {
         else
           data.isHospital=0;
         data.specialisation=data.specialisation.split(",");
-        presentCities.add(data.city);
-
       });
      
-    this.setState({ doctors: datas,
-      cities: Array.from(presentCities.values())});
+    pointer.setState({ doctors: datas.data,
+      cities: datas.city,
+      currentCity:reqcity});
    
   });
-  
-
 }
 toggleCurrentCity(city){//changes the city on click
   if(this.state.currentCity!==city)
-this.setState({
-    currentCity : city
-  });
-  
+  this.apiCall(city);
 }
 
 togglePopup(data=null,show=this.state.showHospital) {//manages showing and hidding of data and setups data for the popup
@@ -85,6 +83,7 @@ togglePopup(data=null,show=this.state.showHospital) {//manages showing and hiddi
     let selectCity = document.getElementById("selectCity");
     let selectedCity = selectCity.options[selectCity.selectedIndex].value;
     localStorage.setItem('lastCity', selectedCity);
+    this.toggleCurrentCity(selectedCity);
   }
   componentDidMount() {
       document.getElementById("selectCity").value=this.state.currentCity;
@@ -94,13 +93,14 @@ render()
 {
  
 const doctors=this.state.doctors;
-return(
+return(<>
+  <Header/>
 <div className="container" style={{"marginTop":"5px"}} >
 <div className="container" >
 <div style={{"backgroundColor":"rgba(0,0,0,0.1)","padding":"10px","maxWidth":"200px","borderRadius":"10px","marginLeft":"15px"}}>
  <select id="selectCity" className="form-control" style={{"maxWidth":"180px"}} onChange={()=>{this.onSelected();}}>
  
-{this.state.cities.map(city=><option key={city} value={city} selected={city===this.state.currentCity?"selected":""}>{city}</option>)}
+{this.state.cities.map(city=><option key={city.city} value={city.city} selected={city.city===this.state.currentCity?"selected":""}>{city.city}</option>)}
 
 </select></div>
 </div>
@@ -129,7 +129,7 @@ null}</div>
 
 
 </div>
-
+</>
 
 );
 }

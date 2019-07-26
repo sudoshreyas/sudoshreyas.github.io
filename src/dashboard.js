@@ -91,11 +91,19 @@ return(
               fromList={false}
         />
       </CSSTransition>
+      
       <div style={{"overflow":"hidden"}}>
         <h1 className="headings">My Appointments</h1><br/>
+        
         {this.state.Appointments.map((Appointment,index)=>
           <>{index===0||this.state.Appointments[index].date!==this.state.Appointments[index-1].date?<><br/><div style={{"width":"100%","color":"#00bf93",fontWeight:"bold"}}>Date : {this.state.Appointments[index].date}</div><br/></>:null}
           {this.state.showAppointment===true&&this.state.showAppointmentIndex===index?
+          <CSSTransition
+          in={true}
+          appear={true}
+          timeout={500}
+          classNames="pull"
+          >
           <div className="col-md-3 col-sm-6 col-xs-12"  style={{"overflow":"hidden","display":"inline-block",float:"none"}}>
           <div style={{"backgroundColor":"#61d4b3","borderRadius":"5px","padding":"10px","overflow":"hidden","marginBottom":"15px"}}>
           <span style={{cursor:"pointer",float:"right"}} onClick={()=>{this.setState({showAppointment:false})}}><i class="far fa-window-close"></i></span>
@@ -106,22 +114,35 @@ return(
             <span style={{"float":"right","fontWeight":"bold",fontSize:"13px"}}>Slot {Appointment.slot}</span>
           </p>
           </div>
-        </div>:
+        </div></CSSTransition>:<CSSTransition
+          in={true}
+          appear={true}
+          timeout={500}
+          classNames="pull"
+          >
         <div className="col-md-3 col-sm-6 col-xs-12" onClick={()=>{this.setState({showAppointment:true,showAppointmentIndex:index})}}  style={{cursor:"pointer","overflow":"hidden","display":"inline-block",float:"none"}}>
           <div style={{"backgroundColor":"#61d4b3","borderRadius":"5px","padding":"10px","overflow":"hidden","marginBottom":"15px"}}>
           <p>{index+1}. Appointment with {Appointment.pat_name}</p>
           <span style={{"float":"left","fontWeight":"bold",fontSize:"13px"}}>Status : {Appointment.status===1?<i>Confirmed</i>:<i style={{color:"red"}}>Cancelled</i>}</span>
           <span style={{"float":"right","fontWeight":"bold",fontSize:"13px"}}>Slot {Appointment.slot}</span>
           </div>
-        </div>
+        </div></CSSTransition>
         }</>)}
+        
       </div>
+
       <div style={{"overflow":"hidden"}}>
         <h1 className="headings">My History</h1><br/>
         {this.state.Histories.map((History,index)=>
           History.view_history===1?
           <>{index===0||this.state.Histories[index].date!==this.state.Histories[index-1].date?<><br/><div style={{"width":"100%","color":"#6670b3",fontWeight:"bold"}}>Date : {this.state.Histories[index].date}</div><br/></>:null}
           {this.state.showHistory===true&&this.state.showHistoryIndex===index?
+            <CSSTransition
+          in={true}
+          appear={true}
+          timeout={500}
+          classNames="pull"
+          >
           <div className="col-md-3 col-sm-6 col-xs-12" style={{"overflow":"hidden","display":"inline-block",float:"none"}}>
           <div style={{"backgroundColor":"#808ad1","borderRadius":"5px","padding":"10px","overflow":"hidden","marginBottom":"15px"}}>
           <span style={{cursor:"pointer",float:"right"}} onClick={()=>{this.setState({showHistory:false})}}><i class="far fa-window-close"></i></span>
@@ -131,13 +152,19 @@ return(
             <span style={{"float":"left","fontWeight":"bold",fontSize:"13px"}}>Review : {History.submit_review===1?"Recieved":"Not Recieved"}</span>
             <span style={{"float":"right","fontWeight":"bold",fontSize:"13px"}}>Slot {History.slot}</span>
           </p>
-          </div></div>:
+          </div></div></CSSTransition>:
+          <CSSTransition
+          in={true}
+          appear={true}
+          timeout={500}
+          classNames="pull"
+          >
         <div className="col-md-3 col-sm-6 col-xs-12" onClick={()=>{this.setState({showHistory:true,showHistoryIndex:index})}}  style={{cursor:"pointer","overflow":"hidden","display":"inline-block",float:"none"}}>
           <div style={{"backgroundColor":"#808ad1","borderRadius":"5px","padding":"10px","overflow":"hidden","marginBottom":"15px"}}>
           <p>Appointment with {History.pat_name}</p>
           <span style={{"float":"right","color":"black","fontSize":"12px"}}>Slot {History.slot}</span>
           </div>
-        </div>}
+        </div></CSSTransition>}
 
         </>:null)}
       </div>

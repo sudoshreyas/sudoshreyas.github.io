@@ -6,6 +6,18 @@
   color:darkred;
 
 }
+html{
+  width:100%;
+}
+.error{
+  color:red;
+  font-style: italic;
+}
+#signup:hover{
+  background-color: white;
+  color: black;
+  transition: all 300ms linear;
+}
 .skill{
 	border:solid;
 	border-width:1px;
@@ -139,7 +151,6 @@ width:100%;
 .drop-appear{
   max-height: 0px;
   overflow: hidden;
-  
 }
 .drop-appear.drop-appear-active{
   
@@ -152,4 +163,24 @@ width:100%;
   border-width: 0px 0px 2px 0px;
   border-color: #515863;
   padding: 5px;
+}
+.rotate-appear{
+  opacity: 0;
+  transform: rotate(-180deg);
+}
+.rotate-appear.rotate-appear-active{
+  
+  opacity: 1;
+  transform: rotate(0deg);
+  transition: all 500ms linear;
+}
+.pull-appear{
+  opacity: 0;
+  margin-top: -100px;
+}
+.pull-appear.pull-appear-active{
+  
+  opacity: 1;
+  margin-top: 0px;
+  transition: all 500ms linear;
 }
