@@ -40,7 +40,7 @@ this.setState({
     return (<div id={this.state.doctor.doc_url}  className="col-xs-12 cont" style={{"position":"relative"}} >
 {/*dipslaying data over bootstrap cards    */}
 
-<div className="thumbnail">
+<div className="thumbnail"style={{padding:"10px"}}>
 <div className="row">
 <div className="col-sm-3"><div className="crop" style={{"maxHeight":"250px"}}><img src={this.state.doctor.doc_img_url} alt=""  className="image"/></div></div>
 <div className="col-sm-5">
@@ -105,15 +105,14 @@ this.setState({
 </div>
 </div>
 <div className="col-sm-4" style={{"marginTop":"10px"}}>
-  <p style={{marginBottom:"5px"}}><i className="far fa-thumbs-up"></i>{this.state.doctor.rank}</p>
-  <p style={{marginBottom:"5px"}}>
-  <span className={this.state.doctor.TotalRatings>0.4?"fa fa-star checked":"fa fa-star"}></span>
+  <p style={{marginBottom:"5px"}}><i className="far fa-thumbs-up"></i>{this.state.doctor.rank} 
+  <span style={{marginLeft:"5px"}} className={this.state.doctor.TotalRatings>0.4?"fa fa-star checked":"fa fa-star"}></span>
   <span className={this.state.doctor.TotalRatings>1.4?"fa fa-star checked":"fa fa-star"}></span>
   <span className={this.state.doctor.TotalRatings>2.4?"fa fa-star checked":"fa fa-star"}></span>
   <span className={this.state.doctor.TotalRatings>3.4?"fa fa-star checked":"fa fa-star"}></span>
   <span className={this.state.doctor.TotalRatings>4.4?"fa fa-star checked":"fa fa-star"}></span>
   </p>
-  <p style={{"color":"green"}}><i className="fas fa-rupee-sign"></i>{this.state.doctor.doc_fee}</p>
+  <p style={{"color":"green",marginBottom:"5px"}}><i className="fas fa-rupee-sign"></i>{this.state.doctor.doc_fee}</p>
   <div>
                   <i className="fas fa-map-marker-alt"></i>
                   <span style={{"padding": "10px"}}>
@@ -121,10 +120,8 @@ this.setState({
                     {this.state.doctor.address_line2}<br/>
                     {this.state.doctor.city}-{this.props.doctor.pincode}<br/>
                   </span><br/>
-                  <br/>
-                  <p style={{"color": "gray"}}>Note : Timings may vary slightly depending upon the number of patients and availability of doctor.</p>
+                  <p style={{"color": "gray",fontSize:"15px"}}>Note : Timings may vary slightly depending upon the number of patients and availability of doctor.</p>
                 </div>
-                <br/>
 
 </div>
 </div>
@@ -142,7 +139,7 @@ this.setState({
   </div>
   <div className="col-md-4 col-sm-6" >
   <div style={{}}>
-  {this.state.fromList?<a href={"/"+this.state.doctor.doc_url+"$"+this.state.doctor.city}><span className="btn" style={{"color":"white","backgroundColor":"#5d00ff","width":"100%"}}>Book</span></a>
+  {this.state.fromList?<a href={"/"+this.state.doctor.doc_url+"$"+this.state.doctor.city}><span className="btn" style={{"color":"white","backgroundColor":"#0F3299","width":"100%"}}>Book</span></a>
       :
       this.state.doctor.book_appt===1?<Book doctor={this.state.doctor.doc_id} style={{}} hospital={this.state.doctor.hospital_id} doc_name={this.state.doctor.doc_firstname+" "+this.state.doctor.doc_middlename+" "+this.state.doctor.doc_lastname} />:<span className="btn disabled" style={{"color":"white","backgroundColor":"#5d00ff","width":"100%"}}>Unavailable</span>}</div></div></center>
   </div>

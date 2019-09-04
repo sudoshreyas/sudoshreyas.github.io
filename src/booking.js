@@ -21,7 +21,6 @@ class App extends Component
 	}
 	
 	componentDidMount() {
-        console.log(this.state);
 		this.setState({
 			width:document.getElementById("pbody").offsetWidth-document.getElementById("code").offsetWidth-42+"px"
 		});

@@ -24,7 +24,6 @@ class App extends Component
                   role : 1
                 },  
                 function(data,status) {
-                	console.log(data);
                 	if(data.opr==="failure")
                 	{
                 		pointer.setState({

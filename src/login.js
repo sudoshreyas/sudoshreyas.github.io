@@ -71,7 +71,6 @@ class Example extends React.Component {
                 },
 	
     function(data,status) {
-   console.log(data);
                 	if(data==="No user found")
       {
         pointer.setState({

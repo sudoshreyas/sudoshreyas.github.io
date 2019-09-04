@@ -32,7 +32,6 @@ apiCall(reqcity){
                   "city":reqcity
                 },  
                 function(datas,status) { 
-                    console.log(datas);
      datas.data.forEach((data)=>{//analyzing the recieced data setting up hospital lists for hospitals ,getting all the cities etc
         if((data.from_hospital===1))
           {

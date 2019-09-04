@@ -1,6 +1,7 @@
 import React , {Component}  from 'react';
 import Head from './header';
 import Foot from './footer';
+import './App.css';
 class App extends Component
 {
 
@@ -112,87 +113,6 @@ return(
       </div>
     </div>
   </section>	
-  <section id="service" className="home-section nopadding paddingtop-60">
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-6 col-md-6">
-          <div className="wow fadeInUp" data-wow-delay="0.2s">
-            <img src="img/dummy/img-1.jpg" className="img-responsive" alt="" />
-          </div>
-        </div>
-        <div className="col-sm-3 col-md-3">
-          <div className="wow fadeInRight" data-wow-delay="0.1s">
-            <div className="service-box">
-              <div className="service-icon">
-                <span><i className="fas fa-heartbeat fa-3x" /></span> 
-              </div>
-              <div className="service-desc">
-                <h5 className="h-light">Cardiology</h5>
-                <p>हृदय-रोग विभाग</p>
-              </div>
-            </div>
-          </div>
-          <div className="wow fadeInRight" data-wow-delay="0.2s">
-            <div className="service-box">
-              <div className="service-icon">
-                <span className="fa fa-wheelchair fa-3x" /> 
-              </div>
-              <div className="service-desc">
-                <h5 className="h-light">Gynaecology</h5>
-                <p>स्त्री रोग विभाग</p>
-              </div>
-            </div>
-          </div>
-          <div className="wow fadeInRight" data-wow-delay="0.3s">
-            <div className="service-box">
-              <div className="service-icon">
-                <span><i className="fas fa-child fa-3x" /></span> 
-              </div>
-              <div className="service-desc">
-                <h5 className="h-light">Pediatrics</h5>
-                <p>बालचिकित्सा</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="col-sm-3 col-md-3">
-          <div className="wow fadeInRight" data-wow-delay="0.1s">
-            <div className="service-box">
-              <div className="service-icon">
-                <span><i className="fas fa-brain fa-3x" /></span> 
-              </div>
-              <div className="service-desc">
-                <h5 className="h-light">Neurology</h5>
-                <p>मस्तिष्क</p>
-              </div>
-            </div>
-          </div>
-          <div className="wow fadeInRight" data-wow-delay="0.2s">
-            <div className="service-box">
-              <div className="service-icon">
-                <span><i className="fas fa-bone fa-3x" /></span> 
-              </div>
-              <div className="service-desc">
-                <h5 className="h-light">Orthopedics</h5>
-                <p>हड्डी रोग</p>
-              </div>
-            </div>
-          </div>
-          <div className="wow fadeInRight" data-wow-delay="0.3s">
-            <div className="service-box">
-              <div className="service-icon">
-                <span><i className="fas fa-tooth fa-3x" /></span>
-              </div>
-              <div className="service-desc">
-                <h5 className="h-light">Dentistry</h5>
-                <p>दंत चिकित्सा</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>		
-    </div>
-  </section>
   {/* Section: services */}
   <section id="healthquiz" className="home-section nopadding paddingtop-60">
     <div className="col-sm-12 col-md-12 col-lg-12">
@@ -262,6 +182,13 @@ return(
           </div>
         </div>
       </div></div></section>
+      <div id="recognitions" className="box">
+        <center><div className="text-center"><h1 style={{color: '#0F3299',fontWeight:"bold"}}>Our Recognitions</h1><br/></div>
+        <img src={require("./img/american.jpeg")} alt="American Center" className="recogImg"/>
+        <img src={require("./img/nexus.jpeg")} alt="Nexus" className="recogImg"/>
+        <img src={require("./img/iitpatna.jpeg")} alt="IIT Patna" className="recogImg"/>
+        </center>
+      </div>
 <Foot/>
  </div>
 

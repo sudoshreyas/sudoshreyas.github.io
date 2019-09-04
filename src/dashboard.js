@@ -51,7 +51,6 @@ componentWillMount() {
 fetch('https://www.mocky.io/v2/5d25ec762f0000df95c10c22')
   .then(res => res.json())
   .then((Appointments) => {
-    console.log(Appointments);
     Appointments.forEach((Appointment)=>{
       Appointment.date=Appointment.date.split('T');
       Appointment.date=Appointment.date[0];
@@ -63,7 +62,6 @@ fetch('https://www.mocky.io/v2/5d25ec762f0000df95c10c22')
 fetch('https://www.mocky.io/v2/5d25eed52f00009236c10c3b')
   .then(res => res.json())
   .then((Histories) => {
-    console.log(Histories);
     Histories.forEach((History)=>{
       History.date=History.date.split('T');
       History.date=History.date[0];

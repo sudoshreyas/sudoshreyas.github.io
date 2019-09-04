@@ -53,6 +53,7 @@ class App extends Component
             </ul>
           </div>
         </div>
+        <a href="/certificates"><div className="btn" style={{backgroundColor:"rgba(0,0,0,0)",color:"white",border:"solid",borderColor:"white",borderRadius:"20px"}}>Verify Certificates</div></a>
       </div>
     </div>	
     <div className="sub-footer">

@@ -204,3 +204,14 @@ width:100%;
 .checked{
   color:#fcdb03
 }
+.recogImg{
+  height: 80px;
+  width: auto;
+  display: inline-block;
+}
+.circleCrop{
+  width: auto;
+  height: 250px;
+  overflow: hidden;
+  border-radius: 500px;
+}

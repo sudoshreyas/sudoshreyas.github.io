@@ -43,7 +43,6 @@ this.setState({
     if(this.state.changed)
     {
       document.getElementById("save").innerHtml="Saving";
-      console.log("api called");
       this.setState(
         {changed: false});
     }

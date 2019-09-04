@@ -63,7 +63,6 @@ render()
 {
  
 let doctor=this.state.doctor;
-console.log(doctor);
 return(
   <>
   

@@ -24,7 +24,6 @@ componentWillMount() {
     fetch('http://www.mocky.io/v2/5d6ebae332000097aaa8aa64')
     .then(res => res.json())
           .then((data) => {
-              console.log(data);
               this.setState({
                   data:data
               })

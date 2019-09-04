@@ -35,6 +35,32 @@ return(
                 </div>
             </div>
         </section>
+        <div id="team" className="box" style={{backgroundColor:"black",color:"white",borderRadius:"0px"}}>
+        <center><h1>Our Team</h1>
+        <div className="row"><center>
+            <div className="col-sm-6 col-md-4">
+                <div className="circleCrop" style={{"width":"250px"}}><img style={{"width":"250px"}} src={"https://www.benq.com/content/dam/b2c/en/knowledge-center/unsure-about-projection-colors,color-gamut,or-wheel/kv-colorpeople-dot-m.jpg"} alt=""  className="image"/></div>
+                <br/>
+                <h4 className="headings" style={{color:"white",marginBottom:"5px"}}>Name of her</h4>
+                <h6>Desgination</h6>
+                <p>She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.</p>
+            </div>
+            <div className="col-sm-6 col-md-4">
+                <div className="circleCrop" style={{"width":"250px"}}><img style={{"width":"250px"}} src={"https://www.benq.com/content/dam/b2c/en/knowledge-center/unsure-about-projection-colors,color-gamut,or-wheel/kv-colorpeople-dot-m.jpg"} alt=""  className="image"/></div>
+                <br/>
+                <h4 className="headings" style={{color:"white",marginBottom:"5px"}}>Name of her</h4>
+                <h6>Desgination</h6>
+                <p>She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.</p>
+            </div><div className="col-sm-6 col-md-4">
+                <div className="circleCrop" style={{"width":"250px"}}><img style={{"width":"250px"}} src={"https://www.benq.com/content/dam/b2c/en/knowledge-center/unsure-about-projection-colors,color-gamut,or-wheel/kv-colorpeople-dot-m.jpg"} alt=""  className="image"/></div>
+                <br/>
+                <h4 className="headings" style={{color:"white",marginBottom:"5px"}}>Name of her</h4>
+                <h6>Desgination</h6>
+                <p>She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.She is a very good girl.</p>
+            </div></center>
+        </div>
+        </center>
+        </div>
         <Foot/>
     </div>
 

@@ -29,7 +29,7 @@ class App extends Component
                     <div className="collapse navbar-collapse navbar-right navbar-main-collapse">
                     <ul className="nav navbar-nav">
                         <li className={this.props.home?"active":""}><a href={(this.props.home?'':"/")+"#intro"}>Home</a></li>
-                        <li className={this.props.list?"active":""}><a href="/doctor_list">Doctors</a></li>
+                        <li className={this.props.list?"active":""}><a href="/doctor_list">Book Appointment</a></li>
                         <li><a href={(this.props.home?'':"/")+"#healthquiz"}>Health Quiz</a></li>
                         <li className={this.props.about?"active":""}><a href="about">About us</a></li>
                         <li><a href="https://play.google.com/store/apps/details?id=info.donationclub.patient">Download App</a></li>

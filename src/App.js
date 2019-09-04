@@ -5,6 +5,7 @@ import doctor from './doctor';
 import home from './home';
 import about from './about';
 import inter from './interview';
+import certs from './certificates';
  class App extends React.Component {
   constructor(props){
     super(props);
@@ -24,6 +25,7 @@ import inter from './interview';
 basename={process.env.PUBLIC_URL}>
  <Switch>
     <Route path="/about" component={about}/>
+    <Route path="/certificates" component={certs}/>
     <Route path="/interview" component={inter}/>
  		<Route path="/doctor_list" component={ list } />
  		<Route path="/:id" component={ doctor } />a
