@@ -3,7 +3,8 @@ import {CSSTransition} from 'react-transition-group';
 import './App.css';
 import Doctor from './doc';
 import $ from 'jquery';
-import Header from './header'
+import Header from './header';
+import Foot from './footer';
 class App extends Component
 {
 constructor(props)
@@ -15,7 +16,7 @@ constructor(props)
    showPopup : 0,
    showHospital :0,
    cities : [],
-   currentCity : localStorage.lastCity!=null?localStorage.lastCity :"All"
+   currentCity : localStorage.lastCity!=null?localStorage.lastCity :null
   };
 }
 
@@ -42,6 +43,7 @@ apiCall(reqcity){
               {
                 data.doc_List[data.doc_List.length]=childData;
                 childData.hospital=data.doc_firstname+" "+data.doc_middlename+" "+data.doc_lastname;
+                childData.hospital_url=data.doc_url;
               }
             });
           }
@@ -94,8 +96,8 @@ render()
  
 const doctors=this.state.doctors;
 return(<>
-  <Header/>
-<div className="container" style={{"marginTop":"5px"}} >
+  <Header home={false} list={true} about={false}/>
+<div className="container" style={{"marginTop":"200px"}} >
 <div className="container" >
 <div style={{"backgroundColor":"rgba(0,0,0,0.1)","padding":"10px","maxWidth":"200px","borderRadius":"10px","marginLeft":"15px"}}>
  <select id="selectCity" className="form-control" style={{"maxWidth":"180px"}} onChange={()=>{this.onSelected();}}>
@@ -129,6 +131,7 @@ null}</div>
 
 
 </div>
+<Foot/>
 </>
 
 );

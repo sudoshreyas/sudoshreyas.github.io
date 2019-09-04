@@ -1,45 +1,42 @@
-
-import './App.css';
 import React , {Component}  from 'react';
-import Login from './login';
-import Signup from './signup';
 class App extends Component
 {
-	constructor(props)
-	{
-	  super(props);
-	  this.state=
-	  {
-	  	showLogin:false,
-	  	showSignUp:false
-	  }
-	}
-	toggleLogin()
-	{
-		this.setState({
-			showLogin:!this.state.showLogin
-		})
-	}
-	toggleSignUp()
-	{
-		this.setState({
-			showSignUp:!this.state.showSignUp
-		})
-	}
 	render()
 	{
 		return(
-			<>
-				<div className="navbar navbar-default" style={{width:"100%"}}>
-					<ul className="nav navbar-nav navbar-right">
-						<li onClick={()=>{this.toggleLogin();}}  style={{cursor:"pointer",margin:"5px",borderRadius:"5px",border:"solid",borderWidth:"2px"}}><span style={{fontSize:"17px",padding:"5px 12px 5px 12px",letterSpacing:"2px"}}>Login</span></li>
-						<li id="signup" onClick={()=>{this.toggleSignUp();}} onMouseOut={()=>{document.getElementById("signup").style.backgroundColor="black";document.getElementById("sign").style.color="white";}} onMouseOver={()=>{document.getElementById("signup").style.backgroundColor="white";document.getElementById("sign").style.color="black";}}  style={{cursor:"pointer",transition:"all 300ms linear",backgroundColor:"black",margin:"5px 20px 5px 5px",borderRadius:"5px",border:"solid",borderWidth:"2px"}}><span style={{fontSize:"17px",padding:"5px 12px 5px 12px",letterSpacing:"2px",color:"white"}} id="sign">Sign Up</span></li>
-					</ul>
-				</div>
-				{this.state.showLogin?<Login close={this.toggleLogin.bind(this)}/>:null}
-				{this.state.showSignUp?<Signup close={this.toggleSignUp.bind(this)}/>:null}
-
-			</>
+			<nav className="navbar navbar-custom navbar-fixed-top" role="navigation">
+                <div className="top-area">
+                    <div className="container">
+                    <div className="row">
+                        <div className="col-sm-6 col-md-6">
+                        <p className="bold text-left"> </p>
+                        </div>
+                        <div className="col-sm-6 col-md-6">
+                        <p className="bold text-right">Call us now +91 7065489757</p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div className="container navigation">
+                    <div className="navbar-header page-scroll">
+                    <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                        <i className="fa fa-bars" />
+                    </button>
+                    <a className="navbar-brand" href="/">
+                        <img src="img/logo.png" alt="" width={100} height={80} />
+                    </a>
+                    </div> 
+                    <div className="collapse navbar-collapse navbar-right navbar-main-collapse">
+                    <ul className="nav navbar-nav">
+                        <li className={this.props.home?"active":""}><a href={(this.props.home?'':"/")+"#intro"}>Home</a></li>
+                        <li className={this.props.list?"active":""}><a href="/doctor_list">Doctors</a></li>
+                        <li><a href={(this.props.home?'':"/")+"#healthquiz"}>Health Quiz</a></li>
+                        <li className={this.props.about?"active":""}><a href="about">About us</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=info.donationclub.patient">Download App</a></li>
+                    </ul>
+                    </div>
+                </div>
+            </nav>
 			);
 	}
 }

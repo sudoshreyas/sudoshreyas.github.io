@@ -1,7 +1,8 @@
 import React  from 'react';
 import {CSSTransition} from 'react-transition-group';
 import './App.css';
-
+import Booking from './booking';
+//to work with the slots process please make the required changes at the line number 136 and 57
 class Book extends React.Component {
   constructor(props)
 {
@@ -16,6 +17,7 @@ class Book extends React.Component {
 this.setState({
   doctorId:this.props.doctor,
   Hospital:this.props.hospital,
+  doc_name:this.props.doc_name,
   morning:{
     min:0,
     max:23
@@ -52,7 +54,7 @@ finalBook(slot)
     let today= new Date();
     if(val1<0)
       this.setState({
-        input:this.state.input-1
+        input:this.state.input-3//make 3 to 1 to make slot process work
       });
     else
     switch(this.state.input)
@@ -99,6 +101,7 @@ finalBook(slot)
           .then(res => res.json())
           .then((data) => {
             data=data[0];
+            data.data="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
             data.slots=data.data.split("");
             let max=47;
             for(let i=0;i<48;i++)
@@ -107,8 +110,9 @@ finalBook(slot)
               max=i-1;
           }
             this.setState({
+              date:reqDate,
               slots:data.slots,
-              max_online:data.online_max_quantity,
+              max_online:11,
               Max:max});
           });
         let slotTimings=["12:00 AM","12:30 AM","01:00 AM","01:30 AM","02:00 AM","02:30 AM","03:00 AM","03:30 AM","04:00 AM","04:30 AM","05:00 AM","05:30 AM","06:00 AM","06:30 AM","07:00 AM","07:30 AM",
@@ -129,7 +133,7 @@ finalBook(slot)
           }
       	
         this.setState({
-          input: 2,
+          input: 4,//change this to 2 to make slots work
           slotTimings:slotTimings,
           Min:min
         });
@@ -144,11 +148,18 @@ finalBook(slot)
       case 3:
         this.finalBook(val1);
         this.setState({
+          Time:val1,
           input: 4});
         break;
-
+      case 4:
+          this.setState({
+            input: 5});
+          break;
       default : ;
     }
+  }
+  back(){
+    this.toggleInput(-1);
   }
   render() {
     return(<CSSTransition
@@ -165,7 +176,7 @@ finalBook(slot)
       <form id={"book"} ref={form => this.form = form}>
       <span style={{"float":"left","width":"100%"}}><label style={{"float":"left"}}>Enter Date :</label><br/></span>
       <span style={{"float":"left","width":"80%"}}><input type="date" onChange={()=>{this.toggleInput()}} placeholder="Enter Date" style={{"width":"100%"}}  id={this.state.doctorId+this.state.Hospital+"date"} max={this.state.maxDate} min={this.state.today} name="date" required={true}/></span>
-      <span className="btn" style={{"color":"white","backgroundColor":"#1DA6FD","float":"right","width":"20%","padding":"2px","borderRadius":"0px 3px 3px 0px"}} onClick={()=>{this.toggleInput()}}><i className="fas fa-sign-in-alt"></i></span>
+      <span className="btn" style={{"color":"white","backgroundColor":"#1DA6FD","float":"right","width":"20%","padding":"3.2px","borderRadius":"0px 3px 3px 0px"}} onClick={()=>{this.toggleInput()}}><i className="fas fa-sign-in-alt"></i></span>
       </form>:
       this.state.input===2?
       <CSSTransition
@@ -184,12 +195,14 @@ finalBook(slot)
       <div style={{"border":"solid","borderRadius":"10px","borderWidth":"1px","borderColor":"#5d00ff","padding":"3px"}}>
       {this.state.slotTimings.map((time,index)=>
         index>=this.state.min&&index<=this.state.max&&this.state.slots[index]!=='0'?(this.state.slots[index]<this.state.max_online || this.state.slots[index]==='A')?
-        <div key={index} className="col-xs-6 col-sm-4 col-md-4 btn" style={{"color":"#1DA6FD","padding":"5px"}} onClick={()=>{this.toggleInput(index)}}>{time}{isNaN(this.state.slots[index])?null:<>({this.state.slots[index]})</>}</div>
+        <div key={index} className="col-xs-6 col-sm-4 col-md-4 btn" style={{"color":"#1DA6FD","padding":"5px"}} onClick={()=>{this.toggleInput(this.state.slotTimings[index])}}>{time}{isNaN(this.state.slots[index])?null:<>({this.state.slots[index]})</>}</div>
         :<div key={index} className="col-xs-6 col-sm-4 col-md-4 btn disabled" style={{"color":"grey","padding":"5px"}}>{time}(full)</div>
         :null
       )
       }<span className="btn" style={{"color":"black","backgroundColor":"white","width":"100%","marginTop":"3px","borderColor":"black"}} onClick={()=>{this.toggleInput(-1)}}><i className="fas fa-chevron-left"></i></span>
       </div>:
+      this.state.input===4?
+      <Booking data={this.state} close={this.back.bind(this)} next={this.toggleInput.bind(this)}/>:
       <span className="btn" style={{"color":"grey","backgroundColor":"white","width":"100%","marginTop":"3px","borderColor":"grey","cursor":"not-allowed"}}>Booked</span>
       }
     </span></CSSTransition>);

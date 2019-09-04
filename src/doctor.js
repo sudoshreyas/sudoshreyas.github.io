@@ -2,6 +2,9 @@ import React , {Component}  from 'react';
 import {CSSTransition} from 'react-transition-group';
 import './App.css';
 import Doctor from './doc';
+import Header from './header';
+import Foot from './footer';
+import $ from 'jquery';
 class App extends Component
 {
 constructor(props)
@@ -9,18 +12,24 @@ constructor(props)
   super(props);
   this.state=
   {
-   doctor: null
+   doctor: null,
+   para:this.props.match.params.id.split("$")
   };
 }
 
 //fetching data from api//
 
 componentWillMount() {
-  fetch('https://www.mocky.io/v2/5d1483282f00007405c4f13d')
-  .then(res => res.json())
-  .then((datas) => {
+  let pointer=this;
+  if(this.state.para.length>1)
+  $.post("https://bigobackend.herokuapp.com/doctors", {
+                  "language_id":1,
+                  "city":pointer.state.para[1]
+                },  
+                function(datas,status) { 
+                  datas=datas.data;
      datas.forEach((data)=>{//analyzing the recieced data setting up hospital lists for hospitals ,getting all the cities etc
-     	if(data.doc_id===this.props.match.params.id)
+     	if(data.doc_url===pointer.state.para[0])
      	{
         if((data.from_hospital===1))
           {
@@ -38,7 +47,7 @@ componentWillMount() {
         else
           data.isHospital=0;
         data.specialisation=data.specialisation.split(",");
-        this.setState({ doctor: data});
+        pointer.setState({ doctor: data});
         
         }
 
@@ -53,9 +62,13 @@ componentWillMount() {
 render()
 {
  
-const doctor=this.state.doctor;
+let doctor=this.state.doctor;
+console.log(doctor);
 return(
-<div className="container" style={{"marginTop":"5px"}} >
+  <>
+  
+<Header home={false} list={false} about={false}/>
+<div className="container" style={{"marginTop":"150px"}} >
 <br/>
 	{doctor!==null?
     <CSSTransition
@@ -74,7 +87,8 @@ return(
 
 
 </div>
-
+<Foot/>
+</>
 
 );
 }

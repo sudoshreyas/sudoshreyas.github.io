@@ -2,6 +2,8 @@ import React , {Component}  from 'react';
 import {CSSTransition} from 'react-transition-group';
 import './App.css';
 import Doctor from './edit';
+import Header from './header';
+import Foot from './footer';
 class App extends Component
 {
 constructor(props)
@@ -74,7 +76,8 @@ render()
 {
  
 const doctor=this.state.doctor;
-return(
+return(<>
+<Header home={false}/>
 <div className="container" style={{"marginTop":"5px"}} >
 <br/>
 	{doctor!==null?
@@ -102,7 +105,7 @@ return(
           in={true}
           appear={true}
           timeout={500}
-          classNames="pull"
+          classNames="down"
           >
           <div className="col-md-3 col-sm-6 col-xs-12"  style={{"overflow":"hidden","display":"inline-block",float:"none"}}>
           <div style={{"backgroundColor":"#61d4b3","borderRadius":"5px","padding":"10px","overflow":"hidden","marginBottom":"15px"}}>
@@ -118,7 +121,7 @@ return(
           in={true}
           appear={true}
           timeout={500}
-          classNames="pull"
+          classNames="down"
           >
         <div className="col-md-3 col-sm-6 col-xs-12" onClick={()=>{this.setState({showAppointment:true,showAppointmentIndex:index})}}  style={{cursor:"pointer","overflow":"hidden","display":"inline-block",float:"none"}}>
           <div style={{"backgroundColor":"#61d4b3","borderRadius":"5px","padding":"10px","overflow":"hidden","marginBottom":"15px"}}>
@@ -141,7 +144,7 @@ return(
           in={true}
           appear={true}
           timeout={500}
-          classNames="pull"
+          classNames="down"
           >
           <div className="col-md-3 col-sm-6 col-xs-12" style={{"overflow":"hidden","display":"inline-block",float:"none"}}>
           <div style={{"backgroundColor":"#808ad1","borderRadius":"5px","padding":"10px","overflow":"hidden","marginBottom":"15px"}}>
@@ -157,7 +160,7 @@ return(
           in={true}
           appear={true}
           timeout={500}
-          classNames="pull"
+          classNames="down"
           >
         <div className="col-md-3 col-sm-6 col-xs-12" onClick={()=>{this.setState({showHistory:true,showHistoryIndex:index})}}  style={{cursor:"pointer","overflow":"hidden","display":"inline-block",float:"none"}}>
           <div style={{"backgroundColor":"#808ad1","borderRadius":"5px","padding":"10px","overflow":"hidden","marginBottom":"15px"}}>
@@ -173,7 +176,8 @@ return(
     <h1>You Are Not Authorized To View This Page</h1>
   }
 </div>
-
+<Foot/>
+</>
 
 );
 }

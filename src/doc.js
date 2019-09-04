@@ -37,7 +37,7 @@ this.setState({
   render() {
     
     //checks that the data recieved is a hospital or not
-    return (<div id={this.state.doctor.doc_id}  className="col-xs-12 cont" style={{"position":"relative"}} >
+    return (<div id={this.state.doctor.doc_url}  className="col-xs-12 cont" style={{"position":"relative"}} >
 {/*dipslaying data over bootstrap cards    */}
 
 <div className="thumbnail">
@@ -45,10 +45,10 @@ this.setState({
 <div className="col-sm-3"><div className="crop" style={{"maxHeight":"250px"}}><img src={this.state.doctor.doc_img_url} alt=""  className="image"/></div></div>
 <div className="col-sm-5">
 <div className="caption">
-<h2 className="txt">{this.state.doctor.doc_firstname} {this.state.doctor.doc_middlename} {this.state.doctor.doc_lastname}</h2>
-<h4 className="txt">
+<h2 className="txt" style={{marginBottom:"5px"}}>{this.state.doctor.doc_firstname} {this.state.doctor.doc_middlename} {this.state.doctor.doc_lastname}</h2>
+<h6 className="txt" style={{marginBottom:"5px"}}>
 <span style={{"color":"#1DA6FD"}}>{this.state.doctor.qualification}</span>
-</h4>
+</h6>
 {this.state.doctor.isHospital===0?
 <div>
 <span id="ver" onMouseEnter={()=>{this.setState({
@@ -64,7 +64,7 @@ this.setState({
     <span key={skill} className="skill">{skill}</span>)
 }</div> 
 <br/>
-<p style={{"textDecoration": "underline","cursor": "pointer"}}><a href={this.state.fromList?('#'+this.state.doctor.hospital_id):("/doctor/"+this.state.doctor.hospital_id)}>{this.state.doctor.hospital}</a></p>
+<p style={{"textDecoration": "underline","cursor": "pointer"}}><a href={this.state.fromList?('#'+this.state.doctor.hospital_url):("/"+this.state.doctor.hospital_url+"$"+this.state.doctor.city)}>{this.state.doctor.hospital}</a></p>
 
 {
   this.state.doctor.from_hospital===1&&this.state.doctor.doc_List.length>0?
@@ -87,9 +87,9 @@ this.setState({
                     <div>
                         <div className="col-md-4"><img alt="Doctor"  src={doc.doc_img_url} style={{"marginTop": "10px","width": "75px","height": "75px","borderRadius": "75px","border": "solid"}}/></div>
                           <div className="col-md-8" style={{"padding": "0px 5px 5px 5px"}}>
-                            <h6>{doc.doc_firstname+" "+doc.doc_middlename+" "+doc.doc_lastname}<a href={this.state.fromList?('#'+doc.doc_id):("/doctor/"+doc.doc_id)}><i className="fas fa-info-circle btn"></i></a></h6>
+                            <h6>{doc.doc_firstname+" "+doc.doc_middlename+" "+doc.doc_lastname}<a href={this.state.fromList?('#'+doc.doc_url):("/"+doc.doc_url+"$"+doc.city)}><i style={{color:"blue"}} className="fas fa-info-circle btn"></i></a></h6>
                             <p>{doc.qualification}<br/>{doc.specialisation}<br/>₹{doc.doc_fee}</p></div>
-                        <center ><span style={{"maxWidth":"320px"}}><a href={"/#/doctor/"+doc.doc_id}><span className="btn" style={{"color":"white","backgroundColor":"#5d00ff"}}>Book</span></a>
+                        <center ><span style={{"maxWidth":"320px"}}><a href={"/"+doc.doc_url+"$"+doc.city}><span className="btn" style={{"color":"white","backgroundColor":"#5d00ff"}}>Book</span></a>
       </span></center>
                     </div>
                     </div>
@@ -105,7 +105,14 @@ this.setState({
 </div>
 </div>
 <div className="col-sm-4" style={{"marginTop":"10px"}}>
-  <p ><i className="far fa-thumbs-up"></i>{this.state.doctor.rank}</p>
+  <p style={{marginBottom:"5px"}}><i className="far fa-thumbs-up"></i>{this.state.doctor.rank}</p>
+  <p style={{marginBottom:"5px"}}>
+  <span className={this.state.doctor.TotalRatings>0.4?"fa fa-star checked":"fa fa-star"}></span>
+  <span className={this.state.doctor.TotalRatings>1.4?"fa fa-star checked":"fa fa-star"}></span>
+  <span className={this.state.doctor.TotalRatings>2.4?"fa fa-star checked":"fa fa-star"}></span>
+  <span className={this.state.doctor.TotalRatings>3.4?"fa fa-star checked":"fa fa-star"}></span>
+  <span className={this.state.doctor.TotalRatings>4.4?"fa fa-star checked":"fa fa-star"}></span>
+  </p>
   <p style={{"color":"green"}}><i className="fas fa-rupee-sign"></i>{this.state.doctor.doc_fee}</p>
   <div>
                   <i className="fas fa-map-marker-alt"></i>
@@ -127,7 +134,7 @@ this.setState({
   <div className="col-md-4  col-sm-3">
   </div>
   <div className="col-md-4  col-sm-3">
-  {this.state.fromList?<span className="btn" style={{"color":"black","width":"100%","backgroundColor":"white","borderColor":"black","marginBottom":"5px"}} onClick={()=>{let link="http://localhost:3000/doctor/"+this.state.doctor.doc_id; var $temp = $("<input>");
+  {this.state.fromList?<span className="btn" style={{"color":"black","width":"100%","backgroundColor":"white","borderColor":"black","marginBottom":"5px"}} onClick={()=>{let link="https://sudoshreyas.github.io/"+this.state.doctor.doc_url+"$"+this.state.doctor.city; var $temp = $("<input>");
   $("body").append($temp);
   $temp.val(link).select();
   document.execCommand("copy");
@@ -135,9 +142,9 @@ this.setState({
   </div>
   <div className="col-md-4 col-sm-6" >
   <div style={{}}>
-  {this.state.fromList?<a href={"/#/doctor/"+this.state.doctor.doc_id}><span className="btn" style={{"color":"white","backgroundColor":"#5d00ff","width":"100%"}}>Book</span></a>
+  {this.state.fromList?<a href={"/"+this.state.doctor.doc_url+"$"+this.state.doctor.city}><span className="btn" style={{"color":"white","backgroundColor":"#5d00ff","width":"100%"}}>Book</span></a>
       :
-  <Book doctor={this.state.doctor.doc_id} style={{}} />}</div></div></center>
+      this.state.doctor.book_appt===1?<Book doctor={this.state.doctor.doc_id} style={{}} hospital={this.state.doctor.hospital_id} doc_name={this.state.doctor.doc_firstname+" "+this.state.doctor.doc_middlename+" "+this.state.doctor.doc_lastname} />:<span className="btn disabled" style={{"color":"white","backgroundColor":"#5d00ff","width":"100%"}}>Unavailable</span>}</div></div></center>
   </div>
 </div>
 </div>

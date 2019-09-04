@@ -72,7 +72,10 @@ class App extends Component
                 function(data,status) {
                 	console.log(data);
                 	if(data.data!=null&&data.data.type==="success")
-                	{window.location.href="#/verify/"+data.phone;}
+                	{
+						localStorage.user=JSON.stringify(data);
+						localStorage.uid=data.uid;window.location.href="/verify/"+data.phone;
+					}
                 	else
                 	{
                 		pointer.setState({
@@ -93,7 +96,7 @@ class App extends Component
 	                    in={true}
 	                    appear={true}
 	                    timeout={500}
-	                    classNames="rotate">
+	                    classNames="pull">
                          <div className="panel panel-primary" style={{marginTop:"20%",overflow:"auto",maxHeight:"60%"}}>
                              <div className="panel-heading" style={{"overflow":"hidden",marginTop:"-1px"}}>
                                  <h2 style={{"float":"left",display:"inline-block"}}>SIGN UP</h2><span style={{"float": "right"}} className="far fa-window-close fa-2x btn" onClick={this.props.close}></span></div>
@@ -115,7 +118,7 @@ class App extends Component
                             <div onClick={()=>{this.submit()}} className="btn btn-primary" >Submit</div>
                             <br/>
                             <p className="error">{this.state.message}</p>
-                        </form></div><div className="panel-footer"><p>Already have an account? <i style={{"color":"#00aeff"}}>Login Here</i></p></div>
+                        </form></div><div className="panel-footer"><p>Already have an account? <i onClick={this.props.login} style={{"color":"#00aeff",cursor:"pointer"}}>Login Here</i></p></div>
                          </div>
                          </CSSTransition>
                          </div>

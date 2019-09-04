@@ -1,25 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import App from './App';
-import list from './list';
-import doctor from './doctor';
-import dashboard from './dashboard';
-import verify from './verify';
 import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
-        <BrowserRouter 
-basename={process.env.PUBLIC_URL}>
- <Switch>
- 		<Route path="/verify/:ph" component={ verify } />
- 		<Route path="/doctor/dashboard" component={ dashboard } />
- 		<Route path="/doctor/:id" component={ doctor } />
- 		<Route path="/doctor_list" component={ list } />
-        <Route path="/" component={ App } />
-        
-        
-   </Switch>
-</BrowserRouter>
+        <App/>
     , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

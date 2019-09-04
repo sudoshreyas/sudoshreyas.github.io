@@ -2,6 +2,8 @@ import $ from 'jquery';
 import {CSSTransition} from 'react-transition-group';
 import './App.css';
 import React , {Component}  from 'react';
+import Header from './header';
+import Foot from './footer';
 class App extends Component
 {
 	constructor(props)
@@ -31,7 +33,7 @@ class App extends Component
                 	}
                 	else{
                 		localStorage.token=data.token;
-                		window.location.href="./";
+                		window.location.href="/";
                 	}
                 });
 
@@ -40,6 +42,8 @@ class App extends Component
 	render()
 	{
 		return(
+			<>
+		<Header home={false}/>
 		<CSSTransition
           in={true}
           appear={true}
@@ -66,7 +70,7 @@ class App extends Component
                     </div>
                 </div>
             </div>
-        </div></CSSTransition>);
+        </div></CSSTransition><Foot/></>);
 	}
 }
 
