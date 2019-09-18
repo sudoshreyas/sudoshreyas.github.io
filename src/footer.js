@@ -7,7 +7,7 @@ class App extends Component
 	{
 		return(
 			<>
-             <footer>
+             <footer style={{zIndex:"99999"}}>
     <div className="container">
       <div className="row">
         <div className="col-sm-6 col-md-4">
@@ -25,7 +25,10 @@ class App extends Component
             <div className="widget">
               <h5>Our Office</h5>
               <p>
-                E36 Ganesh Nagar Pandav Nagar Complex,Delhi
+              Nexus @ American Center
+              24 Kasturba Gandhi Marg
+              Near Barakhamba Metro Station
+              New Delhi 110001
               </p>
               <ul>
                 <li>
@@ -42,7 +45,7 @@ class App extends Component
             </div>
           </div>
         </div>
-        <div className="wow fadeInDown" data-wow-delay="0.1s">
+        <div className="wow fadeInDown" style={{marginLeft:"15px"}} data-wow-delay="0.1s">
           <div className="widget">
             <h5>Follow us</h5>
             <ul className="company-social">
@@ -53,8 +56,9 @@ class App extends Component
             </ul>
           </div>
         </div>
-        <a href="/certificates"><div className="btn" style={{backgroundColor:"rgba(0,0,0,0)",color:"white",border:"solid",borderColor:"white",borderRadius:"20px"}}>Verify Certificates</div></a>
-      </div>
+        <a href="/certificates"><div className="btn" style={{marginLeft:"15px",backgroundColor:"rgba(0,0,0,0)",color:"white",border:"solid",borderColor:"white",borderRadius:"20px"}}>Verify Certificates</div></a>
+        
+      </div><br/>
     </div>	
     <div className="sub-footer">
       <div className="container">

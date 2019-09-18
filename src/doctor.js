@@ -5,6 +5,7 @@ import Doctor from './doc';
 import Header from './header';
 import Foot from './footer';
 import $ from 'jquery';
+import './normal.css';
 class App extends Component
 {
 constructor(props)
@@ -13,7 +14,8 @@ constructor(props)
   this.state=
   {
    doctor: null,
-   para:this.props.match.params.id.split("$")
+   para:this.props.match.params.id.split("$"),
+   eng:localStorage.lang!=null?localStorage.lang:1
   };
 }
 
@@ -21,9 +23,10 @@ constructor(props)
 
 componentWillMount() {
   let pointer=this;
+  let english = /^[A-Za-z0-9]*$/;
   if(this.state.para.length>1)
   $.post("https://bigobackend.herokuapp.com/doctors", {
-                  "language_id":1,
+                  "language_id":english.test(pointer.state.para[1])?1:2,
                   "city":pointer.state.para[1]
                 },  
                 function(datas,status) { 
@@ -56,7 +59,6 @@ componentWillMount() {
     
    
   });
-  
 
 }
 render()
@@ -64,8 +66,7 @@ render()
  
 let doctor=this.state.doctor;
 return(
-  <>
-  
+  <div style={{backgroundColor:'#f4f2f7',marginTop:"-50px"}}>
 <Header home={false} list={false} about={false}/>
 <div className="container" style={{"marginTop":"150px"}} >
 <br/>
@@ -87,7 +88,7 @@ return(
 
 </div>
 <Foot/>
-</>
+</div>
 
 );
 }

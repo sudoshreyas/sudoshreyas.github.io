@@ -11,8 +11,7 @@ class App extends Component
                         <div className="col-sm-6 col-md-6">
                         <p className="bold text-left"> </p>
                         </div>
-                        <div className="col-sm-6 col-md-6">
-                        <p className="bold text-right">Call us now +91 7065489757</p>
+                        <div className="col-sm-6 col-md-6"><p className="bold text-right" style={{color:"white"}}>Call us now +91 7065489757</p>
                         </div>
                     </div>
                     </div>

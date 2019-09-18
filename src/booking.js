@@ -99,9 +99,9 @@ class App extends Component
 	                    appear={true}
 	                    timeout={500}
 	                    classNames="pull">
-                         <div className="panel panel-primary" style={{marginTop:"10%",overflow:"auto",maxHeight:"600px"}}>
-                             <div className="panel-heading" style={{"overflow":"hidden",marginTop:"-1px"}}>
-                                 <h2 style={{"float":"left",display:"inline-block"}}>Booking Form</h2><span style={{"float": "right"}} className="far fa-window-close btn" onClick={this.props.close}></span></div>
+                         <div className="panel panel-primary" style={{marginTop:"30%",overflow:"auto",maxHeight:"400px"}}>
+                             <div className="panel-heading" style={{"overflow":"hidden",marginTop:"-1px",position:"relative"}}>
+                                 <h2 style={{"float":"left",display:"inline-block",marginBottom:"5px"}}>Booking Form</h2><span style={{"float": "right",position:"absolute",top:"10px",right:"0px"}} className="far fa-window-close btn" onClick={this.props.close}></span></div>
                              <div className="panel-body" id="pbody">
                         <form>
                             <div className="form-group">

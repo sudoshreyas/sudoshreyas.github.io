@@ -1370,6 +1370,7 @@ a.btn:focus{
 	.cta-btn {
 		float: none;
 		text-align: center;
+		padding: 0px
 	}
 	
 	.sub-footer p {

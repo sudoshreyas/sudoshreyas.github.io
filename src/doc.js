@@ -40,14 +40,14 @@ this.setState({
     return (<div id={this.state.doctor.doc_url}  className="col-xs-12 cont" style={{"position":"relative"}} >
 {/*dipslaying data over bootstrap cards    */}
 
-<div className="thumbnail"style={{padding:"10px"}}>
+<div className="thumbnail"style={{padding:"10px",marginLeft:window.screen.width>1080?"0px":"5%",marginRight:window.screen.width>1080?"25%":"5%"}}>
 <div className="row">
-<div className="col-sm-3"><div className="crop" style={{"maxHeight":"250px"}}><img src={this.state.doctor.doc_img_url} alt=""  className="image"/></div></div>
+<div className="col-sm-3"><div className="crop" style={{"maxHeight":"250px",paddingRight:window.screen.width>1080?"20%":"0px"}}><img src={this.state.doctor.doc_img_url} alt=""  className="image"/></div></div>
 <div className="col-sm-5">
 <div className="caption">
-<h2 className="txt" style={{marginBottom:"5px"}}>{this.state.doctor.doc_firstname} {this.state.doctor.doc_middlename} {this.state.doctor.doc_lastname}</h2>
-<h6 className="txt" style={{marginBottom:"5px"}}>
-<span style={{"color":"#1DA6FD"}}>{this.state.doctor.qualification}</span>
+<h2 className="txt" style={{marginBottom:"5px",fontSize:"20px","color":"#1DA6FD"}}>{this.state.doctor.doc_firstname} {this.state.doctor.doc_middlename} {this.state.doctor.doc_lastname}</h2>
+<h6 className="txt" style={{marginBottom:"5px",fontSize:"15px"}}>
+<span style={{"color":"black"}}>{this.state.doctor.qualification}</span>
 </h6>
 {this.state.doctor.isHospital===0?
 <div>
@@ -55,8 +55,8 @@ this.setState({
       showlicence : 1
     })}} onMouseLeave={()=>{this.setState({
       showlicence : 0
-    })}}><img alt="" style={{"width": "20px","height": "20px"," borderRadius": "10px"}} src={"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678134-sign-check-512.png"}/><span style={{"color":" #cccccc"}}>Verified</span>{this.state.showlicence ?<span id="licence" style={{" borderRadius": "3px", "marginLeft":"5px", "backgroundColor": "#cccccc","color": "black", "padding": "5px"}}>License : {this.state.doctor.license_no}</span>: null}</span>
-<p><i className="far fa-star" style={{"padding":"3px"}}></i>{this.state.doctor.experience} Years of Experience</p>
+    })}}><img alt="" style={{"width": "20px","height": "20px"," borderRadius": "10px"}} src={"https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678134-sign-check-512.png"}/><span style={{"color":" #cccccc",fontSize:"13px"}}>Verified</span>{this.state.showlicence ?<span id="licence" style={{" borderRadius": "3px",fontSize:"13px", "marginLeft":"5px", "backgroundColor": "#cccccc","color": "black", "padding": "5px"}}>License : {this.state.doctor.license_no}</span>: null}</span>
+<p style={{fontSize:"13px"}}><i className="far fa-star" style={{"padding":"3px"}}></i>{this.state.doctor.experience} Years of Experience</p>
 </div>:<h4 style={{"margin":"5px 0px 0px 0px"}}>Departments</h4>}
 <div className="row">
 {
@@ -64,7 +64,7 @@ this.setState({
     <span key={skill} className="skill">{skill}</span>)
 }</div> 
 <br/>
-<p style={{"textDecoration": "underline","cursor": "pointer"}}><a href={this.state.fromList?('#'+this.state.doctor.hospital_url):("/"+this.state.doctor.hospital_url+"$"+this.state.doctor.city)}>{this.state.doctor.hospital}</a></p>
+<p style={{"textDecoration": "underline","cursor": "pointer",fontSize:"13px"}}><a href={this.state.fromList?('#'+this.state.doctor.hospital_url):("/"+this.state.doctor.hospital_url+"$"+this.state.doctor.city)}>{this.state.doctor.hospital}</a></p>
 
 {
   this.state.doctor.from_hospital===1&&this.state.doctor.doc_List.length>0?
@@ -115,13 +115,13 @@ this.setState({
   <p style={{"color":"green",marginBottom:"5px"}}><i className="fas fa-rupee-sign"></i>{this.state.doctor.doc_fee}</p>
   <div>
                   <i className="fas fa-map-marker-alt"></i>
-                  <span style={{"padding": "10px"}}>
+                  <span style={{"padding": "10px",fontSize:"13px"}}>
                     {this.state.doctor.address_line1}<br/>
                     {this.state.doctor.address_line2}<br/>
                     {this.state.doctor.city}-{this.props.doctor.pincode}<br/>
                   </span><br/>
-                  <p style={{"color": "gray",fontSize:"15px"}}>Note : Timings may vary slightly depending upon the number of patients and availability of doctor.</p>
-                </div>
+                  {/*<p style={{"color": "gray",fontSize:"15px"}}>Note : Timings may vary slightly depending upon the number of patients and availability of doctor.</p>*/}
+  </div>
 
 </div>
 </div>

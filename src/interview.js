@@ -7,89 +7,95 @@ class App extends Component
         super(props);
         
         this.state ={
-          data : {
-            city:null,
-            designation:null,
-            doc_firstname:null,
-            doc_img_url:null,
-            doc_lastname:null,
-            doc_middlename:null,
-            experience:null,
-            questions:[],
-            specialisation:[]
-          }
+          data : [],
+          show:false,
+          showThis:0,
+          doctor:{}
         }
+
       }
 componentWillMount() {
-    fetch('http://www.mocky.io/v2/5d6ebae332000097aaa8aa64')
+   
+    fetch("https://www.mocky.io/v2/5d7ea2b73300007c00f0add4").then(res=>res.json())
+    .then(interview=>{
+        let push=this.state.data;
+        const key='AIzaSyBG-b1BeuadWaDPuSfBZca64bHuyX6GTd0';
+        interview.forEach(view => {
+            let link=view.video;
+            fetch('https://www.googleapis.com/youtube/v3/videos?part=snippet&id='+link+'&key='+key)
     .then(res => res.json())
           .then((data) => {
+              data.items=data.items[0];
+              data.doc=view;
+              push.push(data);
               this.setState({
-                  data:data
-              })
+                  data:push
+              });
           });
+        });
+    });
 }
-submit(){
+toggle(data=null){
+    if(this.state.show)
+    this.setState({show:false});
+    else 
+    this.setState({show:true,showThis:data});
     
 }
 render(){
-    return(<div className="container">
-        <h1 className="headings">Interview</h1>
-            <div className="thumbnail">
-            <div className="row">
-            <div className="col-sm-3"><div className="crop" style={{"maxHeight":"250px"}}><img src={this.state.data.doc_img_url} alt=""  className="image"/></div></div>
-            <div className="col-sm-5">
-            <div className="caption">
-            <h2 className="" style={{marginBottom:"5px"}}>{this.state.data.doc_firstname} {this.state.data.doc_middlename} {this.state.data.doc_lastname}</h2>
-            <h4 className="" style={{marginBottom:"5px"}}>
-            <span style={{"color":"#1DA6FD"}}>Designation : {this.state.data.designation}</span>
-            </h4>
-            <div className="row">
-            {
-            this.state.data.specialisation.map(skill=>
-                <span key={skill} className="skill">{skill}</span>)
-            }</div> 
-            </div>
-            </div>
-            <div className="col-sm-4">
-                <span style={{"color":"green"}}>Experience : {this.state.data.experience}</span><br/><br/>
-                <span style={{"color":"#1DA6FD"}}>City : {this.state.data.city}</span>
-            
-            </div>
-            </div>
-            </div>
-        <div>
-        <h3 className="headings">Instructions</h3>
-        <ul>
-            <li>Attempt all questions</li>
-            <li>All questions 10 marks each</li>
-        </ul>
-        </div>
-        <div>
-            <h3 className="headings">Questions</h3>
-            {
-                this.state.data.questions.map((ques,index)=><CSSTransition
-                in={true}
-                appear={true}
-                timeout={500}
-                classNames="down"
-                >
-                    <div className="box">
-                        <p>{(index+1)+"). "+ques.question}</p>
-                        {ques.type===1?
-                            <><p>{"Answer:"}<br/></p>
-                            {ques.options.map((val,i)=>
-                                <><input type="radio" name={"question"+index} value={val}/>{String.fromCharCode(65+i)+". "+val}<br/></>)}</>:
-                                <div className="form-group">
-                                    <textarea type="text" className="form-control" id={"question"+index} placeholder="Answer" style={{height:"150px"}}></textarea>
-                                </div>}
-                    </div></CSSTransition>
-                )
-            }
-        </div>
-        <div className="box" style={{overflow:"hidden",padding:"5px",borderRadius:"0px 0px 10px 10px",backgroundColor:"#e5d8f2"}}>
-            <div className="btn" onClick={()=>{this.submit()}} style={{cursor:"pointer",backgroundColor:"#8000ff",color:"#ffffff",float:"right"}}>Submit</div>
-        </div>
+    console.log()
+    return(<div>
+        
+        {
+            this.state.show?
+            <CSSTransition
+	            in={true}
+	            appear={true}
+	            timeout={500}
+	            classNames="pull">
+                    <div  style={{position:"fixed",top:"0px",left:"0px",backgroundColor:"rgba(0,0,0,0.5)",width:"100%",height:"100%",zIndex:"9999",overflow:"auto"}}>
+                        <div style={{position:"fixed",bottom:"10px",left:"0px",zIndex:"99",backgroundColor:"#efdaf7",padding:"5px"}}>
+                            <span style={{display:"inline-block",color:"#0004ff"}}>Was this helpful?
+                                <br/>Let us know!!
+                            </span>
+                            <div className="btn" style={{backgroundColor:"green",color:"white",border:"solid",borderColor:"white",borderRadius:"20px 20px 20px 20px",display:"inline-block"}}><i className="far fa-thumbs-up"></i></div>
+                            <div className="btn" style={{backgroundColor:"red",color:"white",border:"solid",borderColor:"white",borderRadius:"20px 20px 20px 20px",display:"inline-block"}}><i className="far fa-thumbs-down"></i></div>
+                        </div>
+                        <span  onClick={()=>{this.toggle(null)}} style={{"float": "right",position:"absolute",top:"10px",right:"0px",color:"black",zIndex:"99999"}} className="far fa-window-close btn"></span>
+                        <div onClick={()=>{}} className="thumbnail"style={{padding:"10px",margin:"0px",overflow:"auto"}}>
+                            <div className="col-md-7"><iframe title={this.state.showThis.items.snippet.thumbnails.high.url} style={{width:"100%",height:window.screen.width>1080?"400px":window.screen.width>720?"350px":window.screen.width>420?"190px":"150px"}} src={"https://www.youtube.com/embed/"+this.state.showThis.items.id} alt="thumbnail" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe><br/></div>
+                            <div className="col-md-5">
+                                <div className="col-md-12 col-sm-6"><div style={{maxHeight:"250px",maxWidth:window.screen.width>1080?"50%":"100%",overflow:"hidden"}}><img src={this.state.showThis.doc.doc_img_url} alt="doctor" style={{width:"100%",height:"auto"}}/></div></div>
+                                <div className="col-md-12 col-sm-6">
+                                <h2 className="txt" style={{marginBottom:"5px",fontSize:"25px"}}>{this.state.showThis.doc.doc_firstname} {this.state.showThis.doc.doc_middlename} {this.state.showThis.doc.doc_lastname}</h2>
+                                <h6 className="txt" style={{marginBottom:"5px",fontSize:"20px"}}>
+                                <span style={{"color":"#1DA6FD"}}>Designation : Doctor</span>
+                                </h6>
+                                <div className="row">
+                                    {
+                                    this.state.showThis.doc.specialisation.map(skill=>
+                                        <span key={skill} className="skill">{skill}</span>)
+                                    }
+                                </div>
+                                <h6 className="txt" style={{marginBottom:"5px",fontSize:"20px",marginTop:"5px"}}>
+                                <span style={{"color":"#1DA6FD"}}>City : {this.state.showThis.doc.city}</span>
+                                </h6></div>
+                            </div>
+                            <br/>
+                            <div className="col-xs-12" style={{marginTop:"10px",overflow:"hidden"}}>
+                            <h3 style={{fontSize:"25px",fontWeight:"bold"}}>{this.state.showThis.items.snippet.title}</h3>
+                            <textarea id="des" style={{width:"100%",height:"300px",color:"black",fontWeight:"500",overflow:"auto",border:"none",backgroundColor:"#f4f2f7"}} value={this.state.showThis.items.snippet.localized.description} readOnly></textarea></div><br/><br/><br/>
+                        </div>
+                    </div>
+            </CSSTransition>
+            :this.state.data.map((data,index)=>
+                <div key={data.id} className={index%5===0?"col-xs-12 col-sm-4 col-md-2 col-md-offset-1":"col-xs-12 col-sm-4 col-md-2"} style={{overflow:"hidden"}}>
+                    <div className="cont1" onClick={()=>{this.toggle(data)}} style={{width:"100%"}}>
+                        <img src={data.items.snippet.thumbnails.high.url} style={{width:"100%",height:"100%"}} alt="thumbnail" className="recogImg"/><br/>
+                        <div className="bottom">{data.items.snippet.title}</div>
+                    </div>
+                </div>)
+        }
     </div>);
 }
 }

@@ -3,6 +3,8 @@ import {CSSTransition} from 'react-transition-group';
 import './App.css';
 import Header from './header';
 import Foot from './footer';
+import './normal.css';
+import $ from 'jquery';
 class App extends Component
 {
     constructor(props){
@@ -16,21 +18,29 @@ class App extends Component
     }
     submit(){
         let code=document.getElementById("code").value;
+        let pointer=this;
         if(code!=="")
         {
-            fetch("http://www.mocky.io/v2/5d7010eb310000a8d2660a7b").then(res=>res.json())
-            .then(data=>{
-                if(data.found===1)
-                    this.setState({
-                        url:data.url,
-                        input:1
-                    });
-                else
-                this.setState({
-                    msg:"Certificate Not Found!!",
-                    invalid:1
-                });
-            })
+            
+            $.ajax({
+                url:"https://bigobackend.herokuapp.com/verifyCert/"+code,
+                success:function(data,status,xhr){
+            console.log(status);    
+            if(xhr.status===200)
+                pointer.setState({
+                    url:code,
+                    input:1
+                })
+                },
+                error:function (xhr, ajaxOptions, thrownError){
+                    if(xhr.status===404) {
+                        console.clear();
+                        pointer.setState({
+                            msg:"Certificate Not Found!!!",
+                            invalid:1
+                        })
+                    }}})
+            
         }
     }
     render(){
@@ -49,7 +59,13 @@ class App extends Component
                         <div className="form-group col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
                         <input type="text" className="form-control" id="code" placeholder="Certificate Code"/>{this.state.invalid===0?null:<><i className="error" style={{float:"right"}}>{this.state.msg}</i><br/></>}<br/>
                         <center><div className="btn" onClick={()=>{this.submit()}} style={{cursor:"pointer",backgroundColor:"#0F3299",color:"#ffffff"}}>Submit</div></center>
-                        </div>:<iframe title="Certificate" src={"https://docs.google.com/gview?url="+this.state.url+"&embedded=true"} style={{"width":"100%",height:"720px"}} frameBorder="0"></iframe>}
+                        </div>:<CSSTransition
+                        in={true}
+                        appear={true}
+                        timeout={500}
+                        classNames="pull"
+                        ><div>
+                        <iframe title="Certificate" src={"https://docs.google.com/gview?url=https://bigobackend.herokuapp.com/verifyCert/"+this.state.url+"&embedded=true"} style={{"width":"100%",height:window.screen.width>420?"590px":"300px"}} frameBorder="0"></iframe></div></CSSTransition>}
                 </center><br/>
             </div></CSSTransition><Foot/></>
         )

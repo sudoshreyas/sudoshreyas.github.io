@@ -176,7 +176,7 @@ finalBook(slot)
       <form id={"book"} ref={form => this.form = form}>
       <span style={{"float":"left","width":"100%"}}><label style={{"float":"left"}}>Enter Date :</label><br/></span>
       <span style={{"float":"left","width":"80%"}}><input type="date" onChange={()=>{this.toggleInput()}} placeholder="Enter Date" style={{"width":"100%"}}  id={this.state.doctorId+this.state.Hospital+"date"} max={this.state.maxDate} min={this.state.today} name="date" required={true}/></span>
-      <span className="btn" style={{"color":"white","backgroundColor":"#1DA6FD","float":"right","width":"20%","padding":"3.2px","borderRadius":"0px 3px 3px 0px"}} onClick={()=>{this.toggleInput()}}><i className="fas fa-sign-in-alt"></i></span>
+      <span className="btn" style={{"color":"white","backgroundColor":"#1DA6FD","float":"right","width":"20%","padding":"3.2px","borderRadius":"0px 3px 3px 0px"}} onClick={()=>{this.toggleInput()}}><i className="fas fa-angle-right"></i></span>
       </form>:
       this.state.input===2?
       <CSSTransition
